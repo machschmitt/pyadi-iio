@@ -227,6 +227,7 @@ def checkemulation(c):
         "ad5940",
         "ad7124",
         "ad7606",
+        "ad7687",
         "ad7689",
         "ad7746",
         "ad7799",
