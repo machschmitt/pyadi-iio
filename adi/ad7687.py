@@ -56,7 +56,15 @@ class ad7687(rx, context_manager):
             "ad7686",
             "ad7687",
             "ad7688",
+            "ad7690",
             "ad7691",
+            "ad7693",
+            "ad7942",
+            "ad7946",
+            "ad7980",
+            "ad7982",
+            "ad7983",
+            "ad7984",
         ]
 
         self._ctrl = None
