@@ -52,25 +52,21 @@ my_ad7091rx = adi.ad7091rx(uri=my_uri, device_name="ad7091rx")
 
 channels = []
 for attr in dir(my_ad7091rx):
-    if type(getattr(my_ad7091rx, attr)) in (
-        adi.ad7091rx._channel_adc,
-    ):
+    if type(getattr(my_ad7091rx, attr)) in (adi.ad7091rx._channel_adc,):
         channels.append(getattr(my_ad7091rx, attr))
 
 # Write votalge value for each channel
 for ch in channels:
     if ch._output:  # Only write if it is an output channel
         mV = input(f"Enter desired voltage for channel {ch.name} in mV: ")
-        #ch(mV)  # Use channel's call method to conveniently set in mV
+        # ch(mV)  # Use channel's call method to conveniently set in mV
 
 # Read each channels and its parameters
 for ch in channels:
     print("***********************")  # Just a separator for easier serial read
     print("Channel Name: ", ch.name)  # Channel Name
     print("is Output? ", ch._output)  # True = Output/Write/DAC, False = Input/Read/ADC
-    print(
-        "Channel Scale: ", ch.scale
-    )  # Channel Scale is Vref/2^12
+    print("Channel Scale: ", ch.scale)  # Channel Scale is Vref/2^12
     print("Channel Raw Value: ", ch.raw)  # Channel Raw Value
 
     # Print Temperature in Celsius

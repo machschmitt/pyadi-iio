@@ -82,9 +82,7 @@ voltageX():                    Returns ADC reading in millivolts (read only)
         for ch in self._ctrl.channels:
             name = ch._id
             output = ch._output
-            setattr(
-                self, name + "_adc", self._channel_adc(self._ctrl, name, output)
-            )
+            setattr(self, name + "_adc", self._channel_adc(self._ctrl, name, output))
 
     class _channel_adc(attribute):
         """AD7091R_8 Input Voltage Channels"""
