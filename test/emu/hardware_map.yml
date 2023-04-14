@@ -347,3 +347,12 @@ max9611:
       - filename: max9611.xml
       - data_devices:
           - iio:device0
+
+ad7091r8:
+  - ad7091r8
+  - pyadi_iio_class_support:
+      - ad7091rx
+  - emulate:
+      - filename: ad7091r8.xml
+      - data_devices:
+          - iio:device0
