@@ -36,8 +36,8 @@ from adi.context_manager import context_manager
 
 
 class ad7091rx(context_manager):
-    """AD7091R_8, AD7091R_4, and AD7091R_2 SPI interface,
-       8/4/2-channel, 12-bit SAR ADC"""
+    """AD7091R-2/AD7091R-4/AD7091R-8 SPI interface,
+       2-/4-/8-channel, 12-bit SAR ADC"""
 
     _device_name = ""
 
@@ -85,7 +85,7 @@ voltageX():                    Returns ADC reading in millivolts (read only)
             setattr(self, name + "_adc", self._channel_adc(self._ctrl, name, output))
 
     class _channel_adc(attribute):
-        """AD7091R_8 Input Voltage Channels"""
+        """AD7091R-8/-4/-2 Input Voltage Channels"""
 
         # AD7091RX ADC channel
         def __init__(self, ctrl, channel_name, output):
