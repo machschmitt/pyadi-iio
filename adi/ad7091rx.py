@@ -44,11 +44,11 @@ class ad7091rx(context_manager):
     def __repr__(self):
         retstr = f"""
 ad7091rx(uri="{self.uri}") object "{self._device_name}"
-Analog I/O pins are configured in the device tree and can be ADC, DAC, or both.
+Analog I/O pins are configured in the device tree and can be ADC.
 Channel attributes are as follows, where X corresponds to device channel number:
 
 voltageX_adc.raw:              Raw 12-bit ADC code. read only for ADC channels
-voltageX_adc.scale:            ADC scale, millivolts per lsb
+voltageX_adc.scale:            ADC scale, millivolts per LSB
 voltageX():                    Returns ADC reading in millivolts (read only)
 
 """
@@ -59,12 +59,21 @@ voltageX():                    Returns ADC reading in millivolts (read only)
         context_manager.__init__(self, uri, self._device_name)
 
         compatible_parts = [
-            "ad7091r2",
-            "ad7091r4",
-            "ad7091r8",
+            "ad7091r-2",
+            "ad7091r-4",
+            "ad7091r-8",
         ]
 
-        self.ctrl = None
+        #self._ctrl = None
+
+        #self._ctrl = self._ctx.find_device("ad7091r-8")
+        #self._rxadc = self._ctx.find_device("ad7768")
+        #self._device_name = "ad7091r-8" #TODO ad7091r2 ??
+
+        #print("_ctx: ", str(self._ctx))
+
+        #from pprint import pprint
+        #pprint(vars(self._ctx))
 
         if not device_name:
             device_name = compatible_parts[0]
@@ -83,6 +92,9 @@ voltageX():                    Returns ADC reading in millivolts (read only)
             name = ch._id
             output = ch._output
             setattr(self, name + "_adc", self._channel_adc(self._ctrl, name, output))
+
+        from pprint import pprint
+        pprint(vars(self))
 
     class _channel_adc(attribute):
         """AD7091R-8/-4/-2 Input Voltage Channels"""
