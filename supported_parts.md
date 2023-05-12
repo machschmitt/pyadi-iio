@@ -11,6 +11,9 @@
 
 ### Currently supported hardware
 - AD2S1210
+- AD4003
+- AD4007
+- AD4011
 - AD4020
 - AD4130
 - AD4110
@@ -106,6 +109,7 @@
 - AD4858
 - AD9739A
 - ADA4961
+- ADAQ4003
 - ADAQ4216
 - ADAQ4220
 - ADAQ4224
