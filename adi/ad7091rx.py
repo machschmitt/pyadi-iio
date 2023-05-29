@@ -64,17 +64,6 @@ voltageX():                    Returns ADC reading in millivolts (read only)
             "ad7091r-8",
         ]
 
-        #self._ctrl = None
-
-        #self._ctrl = self._ctx.find_device("ad7091r-8")
-        #self._rxadc = self._ctx.find_device("ad7768")
-        #self._device_name = "ad7091r-8" #TODO ad7091r2 ??
-
-        #print("_ctx: ", str(self._ctx))
-
-        #from pprint import pprint
-        #pprint(vars(self._ctx))
-
         if not device_name:
             device_name = compatible_parts[0]
         else:
@@ -92,9 +81,6 @@ voltageX():                    Returns ADC reading in millivolts (read only)
             name = ch._id
             output = ch._output
             setattr(self, name + "_adc", self._channel_adc(self._ctrl, name, output))
-
-        from pprint import pprint
-        pprint(vars(self))
 
     class _channel_adc(attribute):
         """AD7091R-8/-4/-2 Input Voltage Channels"""
