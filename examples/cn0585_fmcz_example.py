@@ -1,3 +1,4 @@
+import argparse
 import sys
 import time
 
@@ -10,9 +11,18 @@ import numpy as np
 
 adaq23876_vref = 2.048
 adaq23876_gain = 0.37 / 4.07
-my_uri = sys.argv[1] if len(sys.argv) >= 2 else "ip:10.48.65.187"
-print("uri: " + str(my_uri))
 
+parser = argparse.ArgumentParser(description="CN0585 project python example")
+parser.add_argument(
+    "-u",
+    "--uri",
+    metavar="uri",
+    default="ip:analog.local",
+    help="An URI to the libiio context",
+)
+
+args = parser.parse_args()
+print("uri: " + str(args.uri))
 
 class adaq23876(adi.ltc2387):
     _rx_channel_names = ["voltage0", "voltage1", "voltage2", "voltage3"]
@@ -21,11 +31,11 @@ class adaq23876(adi.ltc2387):
 
 # device connections
 
-adaq23876_adc = adaq23876(my_uri)
-ad3552r_0 = adi.axi_ad3552r(uri=my_uri, device_name="axi-ad3552r-0")
-ad3552r_1 = adi.axi_ad3552r(uri=my_uri, device_name="axi-ad3552r-1")
-voltage_monitor = adi.ad7291(uri=my_uri)
-gpio_controller = adi.one_bit_adc_dac(uri=my_uri, name="one-bit-adc-dac")
+adaq23876_adc = adaq23876(args.uri)
+ad3552r_0 = adi.axi_ad3552r(uri=args.uri, device_name="axi-ad3552r-0")
+ad3552r_1 = adi.axi_ad3552r(uri=args.uri, device_name="axi-ad3552r-1")
+voltage_monitor = adi.ad7291(uri=args.uri)
+gpio_controller = adi.one_bit_adc_dac(uri=args.uri, name="one-bit-adc-dac")
 
 # gpio values setup
 
@@ -62,8 +72,8 @@ print("Channel 7: ", voltage_monitor.voltage7(), " millivolts")
 
 # ####################     AXI REGISTERS READ/WRITE ############################
 
-hdl_dut_write_channel = adi.mwpicore(uri=my_uri, device_name="mwipcore0:mmwr-channel0")
-hdl_dut_read_channel = adi.mwpicore(uri=my_uri, device_name="mwipcore0:mmrd-channel1")
+hdl_dut_write_channel = adi.mwpicore(uri=args.uri, device_name="mwipcore0:mmwr-channel0")
+hdl_dut_read_channel = adi.mwpicore(uri=args.uri, device_name="mwipcore0:mmrd-channel1")
 
 if hdl_dut_write_channel.check_matlab_ip():
     hdl_dut_write_channel.axi4_lite_register_write(0x100, 0x1)
