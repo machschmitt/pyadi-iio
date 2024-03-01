@@ -1,6 +1,5 @@
 import sys
 import time
-from test.eeprom import read_fru_eeprom
 
 import adi
 import matplotlib.pyplot as plt
