@@ -1,3 +1,4 @@
+import argparse
 import sys
 import time
 
@@ -8,12 +9,24 @@ import numpy as np
 # Optionally pass URI as command line argument,
 # else use default ip:analog.local
 
-my_uri = sys.argv[1] if len(sys.argv) >= 2 else "ip:analog.local"
-print("uri: " + str(my_uri))
+parser = argparse.ArgumentParser(description="AD3552R python example")
+parser.add_argument(
+    "-u",
+    "--uri",
+    metavar="uri",
+    default="ip:analog.local",
+    help="An URI to the libiio context",
+)
+parser.add_argument(
+    "-d", "--device", default="ad3552r", help="An URI to the libiio context"
+)
+
+args = parser.parse_args()
+print("uri: " + str(args.uri))
 
 # device connections
 
-ad3552r = adi.axi_ad3552r(uri=my_uri, device_name="axi-ad3552r")
+ad3552r = adi.axi_ad3552r(uri=args.uri, device_name=args.device)
 
 # device configurations
 
